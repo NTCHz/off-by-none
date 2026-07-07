@@ -121,3 +121,6 @@ Reference from CLAUDE.md:
 
 Or paste into any agent's system prompt / subagent instructions. Highest-leverage
 sections for small models (Haiku): 1, 3, 4. For Opus: 6, 7, 10.
+For Sonnet: 3, 4, 6 (inferred, not yet tested — Sonnet sits between the two
+tested tiers; the adjacent-finding reporting gap in section 6 failed on both
+tested models, so assume it applies until probed).
