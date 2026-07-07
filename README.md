@@ -69,6 +69,11 @@ both exact-boundary off-by-ones, which is why boundary-value coverage is
 mandatory rather than a suggestion — and where the name comes from: the goal
 is to ship off by none.
 
+Tested primarily on Claude Opus. Also reproduced on Claude Haiku: on a
+multi-rule spec task, baseline Haiku failed the same exact-boundary trap
+(11/12) and passed with the skill (12/12) — one run per arm, so treat it as
+a signal, not a benchmark. The skill is plain markdown and model-agnostic.
+
 ## What it does NOT fix
 
 This skill narrows the gap on spec-implementation tasks specifically —
