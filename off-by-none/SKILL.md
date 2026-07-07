@@ -27,7 +27,10 @@ Self-written tests inherit the same misreading as your implementation, so they p
 
 5. **Adversarial re-read.** Go back to the spec, clause by clause, and for each ask: "is there an input where another literal reading of this sentence gives a different answer than my code?" Ambiguity between two readings = write a test for both readings and pick the one the spec's words actually say.
 
-6. **Claim done only with evidence:** ledger with every item checked + test output shown.
+6. **Claim done only with evidence.** The final report has three REQUIRED sections (write "none" explicitly when empty):
+   - **Verified:** the ledger with every item checked + pasted test output.
+   - **Assumed:** every spec reference you could not inspect — external systems, config values, "same as X", "matching the existing behavior of Y". One line each. An unverifiable reference makes the ship claim conditional: state what must be confirmed, never an unqualified "ready to ship".
+   - **Seen but not touched:** anything broken or suspicious in the code you worked around, outside the requested change. Before writing this section, re-read every function in every file you edited, including the ones you didn't change. For each untouched function, state what it literally does to its input step by step (especially any transformation that happens before a check) — observations only. Never write a verdict like "works correctly" on code you did not spec-test; you have no evidence for it. Report; do not fix. "None" means "I read the surrounding code and found nothing", never "I didn't look". "Minimal change" limits the diff, not the report.
 
 ## Quick Reference
 
@@ -47,6 +50,8 @@ Self-written tests inherit the same misreading as your implementation, so they p
 | "Time pressure — skip the ledger" | The ledger takes 1 minute. A shipped off-by-one costs a rollback. |
 | "The boundary case is obvious" | Both baseline failures in testing this skill were exact-boundary off-by-ones that the author's own tests missed. Hand-compute expected values at the boundary. |
 | "Minimal change was requested, so minimal checking" | Minimal change refers to the diff, not the verification. |
+| "Spec says 'same rounding as the billing system' — that's ROUND_HALF_EVEN, done" | A reference to a system you cannot see is an assumption, not a fact. Label it in **Assumed** and make the ship claim conditional on confirming it. |
+| "The other function's bug is out of scope, so don't mention it" | Out of scope to FIX, never out of scope to REPORT. It goes in **Seen but not touched**. |
 
 ## Red Flags — STOP
 
@@ -54,3 +59,6 @@ Self-written tests inherit the same misreading as your implementation, so they p
 - No test case sits exactly AT a numeric limit from the spec
 - Expected values in tests were copied from your function's output
 - You read the spec once, at the start, and never re-read it after implementing
+- "Ready to ship" while the spec references a system, module, or config value you never inspected
+- A checked checklist item you never actually ran
+- Your report is missing the **Assumed** or **Seen but not touched** section entirely

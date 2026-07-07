@@ -23,8 +23,12 @@ When implementing or fixing code against a written spec, the skill requires:
    count.
 5. **An adversarial re-read** of the spec, clause by clause, checking for
    inputs where an alternate literal reading would give a different answer.
-6. **A done-claim gated on evidence** — a fully checked ledger plus shown
-   test output.
+6. **A done-claim gated on evidence** — a report with three required
+   sections: **Verified** (checked ledger + pasted test output), **Assumed**
+   (every spec reference you couldn't inspect — external systems, config
+   values, "same as X" — making the ship claim conditional), and **Seen but
+   not touched** (observations about surrounding code you read but didn't
+   change; never verdicts on code you didn't spec-test).
 
 ## Install
 
@@ -74,6 +78,19 @@ multi-rule spec task, baseline Haiku failed the same exact-boundary trap
 (11/12) and passed with the skill (12/12) — one run per arm, so treat it as
 a signal, not a benchmark. The skill is plain markdown and model-agnostic.
 
+A sixth round probed three new dimensions with fresh pressure scenarios:
+calibration (a spec referencing systems the agent cannot see), adjacent-bug
+reporting (an obvious bug next to the requested change), and root-cause
+debugging. Baselines failed the first two — Haiku shipped a fabricated
+verification checklist over unverifiable references, and both Opus and Haiku
+silently omitted a bug sitting in the same 14-line file they edited. That's
+where the three-section done-report comes from. Root-cause debugging showed
+no baseline failure, so per TDD nothing was added for it. Closing the
+reporting gap on Haiku took two wording iterations: a required section alone
+produced "None" written without looking, and a look-first rule produced
+unearned "works correctly" verdicts — the shipped wording demands
+step-by-step observations and bans verdicts on untested code.
+
 ## What it does NOT fix
 
 This skill narrows the gap on spec-implementation tasks specifically —
@@ -85,6 +102,12 @@ claims. It does **not** close gaps in:
 - Judgment calls where the spec itself is genuinely silent or contradictory
 
 Use it for spec-to-code fidelity, not as a general capability upgrade.
+
+For the broader (untested) behavioral guidance this skill's round-6 scenarios
+were drawn from, see [`docs/FABLE5-THINKING.md`](docs/FABLE5-THINKING.md) — a
+process-over-IQ protocol you can paste into any agent's context. Unlike
+`SKILL.md`, it has not been through per-line TDD; treat it as reference
+material, not tested guidance.
 
 ## Contributing
 
