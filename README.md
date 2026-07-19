@@ -78,6 +78,19 @@ multi-rule spec task, baseline Haiku failed the same exact-boundary trap
 (11/12) and passed with the skill (12/12) — one run per arm, so treat it as
 a signal, not a benchmark. The skill is plain markdown and model-agnostic.
 
+A seventh round probed Claude Sonnet with three fresh scenarios (one run per
+arm): an exact-boundary truncation trap graded by a hidden 6-case grader, an
+obvious bug adjacent to a "minimal change" request, and a spec referencing a
+repo not present on the machine. Baseline Sonnet passed the boundary trap
+(6/6) and labeled the uninspectable reference as an assumption with a
+conditional ship claim — but silently omitted the adjacent bug, the same
+reporting gap found on Opus and Haiku in round 6; with the skill it reported
+the bug in **Seen but not touched**. Per TDD nothing new was added to
+SKILL.md — the failing dimension was already covered. Caveat: round-7
+baselines ran with the author's global Claude Code rules in context, so they
+measure the skill's marginal value over an already-disciplined setup rather
+than over a bare model.
+
 A sixth round probed three new dimensions with fresh pressure scenarios:
 calibration (a spec referencing systems the agent cannot see), adjacent-bug
 reporting (an obvious bug next to the requested change), and root-cause

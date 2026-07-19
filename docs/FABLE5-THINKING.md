@@ -121,6 +121,12 @@ Reference from CLAUDE.md:
 
 Or paste into any agent's system prompt / subagent instructions. Highest-leverage
 sections for small models (Haiku): 1, 3, 4. For Opus: 6, 7, 10.
-For Sonnet: 3, 4, 6 (inferred, not yet tested — Sonnet sits between the two
-tested tiers; the adjacent-finding reporting gap in section 6 failed on both
-tested models, so assume it applies until probed).
+For Sonnet: 6 (tested, round 7 — one run per arm). Baseline Sonnet passed the
+exact-boundary trap (6/6 on a fresh hidden grader) and correctly labeled an
+uninspectable spec reference as an assumption, but silently omitted an obvious
+adjacent bug in the same file it edited — the same section-6 gap as Opus and
+Haiku; with the skill it reported the bug. Sections 3 and 4 showed no baseline
+failure on Sonnet, so they are not claimed for it. Caveat: baselines ran with
+the author's global CLAUDE.md rules in context (verification-over-assertion
+etc.), so this measures marginal value over an already-disciplined setup, not
+over a bare model.
