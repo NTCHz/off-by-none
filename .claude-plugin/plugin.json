@@ -1,0 +1,13 @@
+{
+  "name": "off-by-none",
+  "description": "Spec-faithful implementation: spec-derived tests, mandatory boundary coverage, and an evidence-gated done-report. Every rule TDD-tested against baseline failures on Opus, Sonnet, and Haiku.",
+  "version": "1.0.0",
+  "author": {
+    "name": "NTCHz",
+    "url": "https://github.com/NTCHz"
+  },
+  "homepage": "https://github.com/NTCHz/off-by-none",
+  "repository": "https://github.com/NTCHz/off-by-none",
+  "license": "MIT",
+  "keywords": ["claude-code", "skill", "spec", "testing", "tdd", "verification"]
+}

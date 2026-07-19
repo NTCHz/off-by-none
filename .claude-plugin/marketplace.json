@@ -1,0 +1,14 @@
+{
+  "name": "off-by-none",
+  "owner": {
+    "name": "NTCHz",
+    "url": "https://github.com/NTCHz"
+  },
+  "plugins": [
+    {
+      "name": "off-by-none",
+      "source": "./",
+      "description": "Spec-faithful implementation: spec-derived tests, mandatory boundary coverage, and an evidence-gated done-report. Every rule TDD-tested against baseline failures on Opus, Sonnet, and Haiku."
+    }
+  ]
+}

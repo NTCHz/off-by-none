@@ -10,9 +10,9 @@ Claude Code skill (plain markdown, no code) that improves spec-implementation fi
 
 ## Architecture
 
-- `off-by-none/SKILL.md` — the skill itself and the source of truth; README only summarizes it.
+- `skills/off-by-none/SKILL.md` — the skill itself and the source of truth; README only summarizes it.
 - `docs/FABLE5-THINKING.md` — untested reference protocol the skill's round-6 scenarios were drawn from; explicitly NOT TDD-validated guidance.
-- `install.sh` defines a skill as a real directory (not symlink) next to itself containing `SKILL.md` — the repo can host multiple skills.
+- `install.sh` defines a skill as a real directory (not symlink) under `skills/` containing `SKILL.md` — the repo can host multiple skills. `.claude-plugin/` makes the repo installable as a plugin/marketplace.
 
 ## Conventions
 

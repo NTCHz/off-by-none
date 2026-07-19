@@ -5,7 +5,7 @@ models on spec-implementation tasks. It forces spec-derived tests, mandatory
 boundary-value coverage, and an adversarial re-read of the spec before any
 work is declared done.
 
-Read [`off-by-none/SKILL.md`](off-by-none/SKILL.md) for the full workflow — this
+Read [`skills/off-by-none/SKILL.md`](skills/off-by-none/SKILL.md) for the full workflow — this
 README summarizes it, the skill file is the source of truth.
 
 ## What it does
@@ -32,6 +32,15 @@ When implementing or fixing code against a written spec, the skill requires:
 
 ## Install
 
+### As a plugin (recommended)
+
+```bash
+claude plugin marketplace add NTCHz/off-by-none
+claude plugin install off-by-none@off-by-none
+```
+
+### As a plain skill
+
 Clone and run the installer:
 
 ```bash
@@ -48,10 +57,10 @@ cd off-by-none
 ./install.sh --list        # show what's installable
 ```
 
-Or install manually — copy the `off-by-none/` folder into `~/.claude/skills/`:
+Or install manually — copy the `skills/off-by-none/` folder into `~/.claude/skills/`:
 
 ```bash
-cp -R off-by-none ~/.claude/skills/off-by-none
+cp -R skills/off-by-none ~/.claude/skills/off-by-none
 ```
 
 ## Update
@@ -77,6 +86,19 @@ Tested primarily on Claude Opus. Also reproduced on Claude Haiku: on a
 multi-rule spec task, baseline Haiku failed the same exact-boundary trap
 (11/12) and passed with the skill (12/12) — one run per arm, so treat it as
 a signal, not a benchmark. The skill is plain markdown and model-agnostic.
+
+A sixth round probed three new dimensions with fresh pressure scenarios:
+calibration (a spec referencing systems the agent cannot see), adjacent-bug
+reporting (an obvious bug next to the requested change), and root-cause
+debugging. Baselines failed the first two — Haiku shipped a fabricated
+verification checklist over unverifiable references, and both Opus and Haiku
+silently omitted a bug sitting in the same 14-line file they edited. That's
+where the three-section done-report comes from. Root-cause debugging showed
+no baseline failure, so per TDD nothing was added for it. Closing the
+reporting gap on Haiku took two wording iterations: a required section alone
+produced "None" written without looking, and a look-first rule produced
+unearned "works correctly" verdicts — the shipped wording demands
+step-by-step observations and bans verdicts on untested code.
 
 A seventh round probed Claude Sonnet with three fresh scenarios (one run per
 arm): an exact-boundary truncation trap graded by a hidden 6-case grader, an
@@ -112,19 +134,6 @@ fabricated calibration claims (asserting an uninspectable rounding mode
 coverage stays in the skill — it is cheap insurance and the historical
 record shows models regress — but the skill's measured value today is the
 evidence-gated done-report, not the boundary drill.
-
-A sixth round probed three new dimensions with fresh pressure scenarios:
-calibration (a spec referencing systems the agent cannot see), adjacent-bug
-reporting (an obvious bug next to the requested change), and root-cause
-debugging. Baselines failed the first two — Haiku shipped a fabricated
-verification checklist over unverifiable references, and both Opus and Haiku
-silently omitted a bug sitting in the same 14-line file they edited. That's
-where the three-section done-report comes from. Root-cause debugging showed
-no baseline failure, so per TDD nothing was added for it. Closing the
-reporting gap on Haiku took two wording iterations: a required section alone
-produced "None" written without looking, and a look-first rule produced
-unearned "works correctly" verdicts — the shipped wording demands
-step-by-step observations and bans verdicts on untested code.
 
 ## What it does NOT fix
 

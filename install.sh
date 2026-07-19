@@ -6,7 +6,7 @@
 #   ./install.sh off-by-none another-skill  # install only the named skills
 #   ./install.sh --list               # show installable skills
 #
-# A skill = a real directory (not symlink) next to this script containing SKILL.md.
+# A skill = a real directory (not symlink) under skills/ containing SKILL.md.
 set -euo pipefail
 
 SRC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -14,7 +14,7 @@ DEST_ROOT="$HOME/.claude/skills"
 
 available() {
   local d
-  for d in "$SRC_DIR"/*/; do
+  for d in "$SRC_DIR"/skills/*/; do
     d="${d%/}"
     [ -L "$d" ] && continue
     [ -f "$d/SKILL.md" ] || continue
@@ -30,7 +30,7 @@ fi
 skills=()
 if [ $# -ge 1 ]; then
   for name in "$@"; do
-    if [ ! -f "$SRC_DIR/$name/SKILL.md" ]; then
+    if [ ! -f "$SRC_DIR/skills/$name/SKILL.md" ]; then
       echo "error: unknown skill '$name' — run $0 --list" >&2
       exit 1
     fi
@@ -47,7 +47,7 @@ fi
 
 installed=0
 for name in "${skills[@]}"; do
-  src="$SRC_DIR/$name"
+  src="$SRC_DIR/skills/$name"
   dest="$DEST_ROOT/$name"
   if [ "$src" = "$dest" ]; then
     echo "skip $name (already in place)"
