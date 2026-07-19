@@ -10,5 +10,6 @@
       "source": "./",
       "description": "Spec-faithful implementation: spec-derived tests, mandatory boundary coverage, and an evidence-gated done-report. Every rule TDD-tested against baseline failures on Opus, Sonnet, and Haiku."
     }
-  ]
+  ],
+  "description": "Marketplace for the off-by-none skill: spec-faithful implementation with TDD-tested rules."
 }
