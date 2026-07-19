@@ -91,6 +91,28 @@ baselines ran with the author's global Claude Code rules in context, so they
 measure the skill's marginal value over an already-disciplined setup rather
 than over a bare model.
 
+An eighth round removed that caveat and added repetition: the same three
+scenarios, run headless via `claude -p` under a clean config (no CLAUDE.md,
+no rules, no plugins, no hooks — bare model) on Sonnet 5, Opus 4.8, and
+Haiku 4.5, with 3-5 runs per cell. Results:
+
+| clean baseline → with skill | boundary trap | adjacent-bug report | unverifiable-reference calibration |
+|---|---|---|---|
+| Sonnet 5 | 3/3 | **0/5 → 5/5** | 3/3 |
+| Opus 4.8 | 3/3 | **4/5 → 5/5** | 3/3 |
+| Haiku 4.5 | 3/3 | **0/5 → 5/5** | **0/3 → 3/3** |
+
+Three findings. (1) The exact-boundary trap no longer catches any current
+model at baseline — the weakness that named this skill has largely been
+absorbed by the models themselves. (2) The durable gap is silent omission of
+adjacent bugs: bare Sonnet and Haiku failed it 0/5 under "minimal change"
+pressure, and the skill fixed it 5/5 on every model. (3) Bare Haiku also
+fabricated calibration claims (asserting an uninspectable rounding mode
+"matches the billing system", 0/3) and the skill fixed that 3/3. Boundary
+coverage stays in the skill — it is cheap insurance and the historical
+record shows models regress — but the skill's measured value today is the
+evidence-gated done-report, not the boundary drill.
+
 A sixth round probed three new dimensions with fresh pressure scenarios:
 calibration (a spec referencing systems the agent cannot see), adjacent-bug
 reporting (an obvious bug next to the requested change), and root-cause

@@ -121,12 +121,12 @@ Reference from CLAUDE.md:
 
 Or paste into any agent's system prompt / subagent instructions. Highest-leverage
 sections for small models (Haiku): 1, 3, 4. For Opus: 6, 7, 10.
-For Sonnet: 6 (tested, round 7 — one run per arm). Baseline Sonnet passed the
-exact-boundary trap (6/6 on a fresh hidden grader) and correctly labeled an
-uninspectable spec reference as an assumption, but silently omitted an obvious
-adjacent bug in the same file it edited — the same section-6 gap as Opus and
-Haiku; with the skill it reported the bug. Sections 3 and 4 showed no baseline
-failure on Sonnet, so they are not claimed for it. Caveat: baselines ran with
-the author's global CLAUDE.md rules in context (verification-over-assertion
-etc.), so this measures marginal value over an already-disciplined setup, not
-over a bare model.
+Round-8 update (clean `claude -p` baselines — no rules/plugins/hooks — 3-5
+runs per cell on Sonnet 5, Opus 4.8, Haiku 4.5): the adjacent-finding
+reporting gap (section 6) is the durable one — bare Sonnet and Haiku failed
+it 0/5, Opus 4/5, and the skill closed it 5/5 on all three. Bare Haiku also
+fabricated claims about an uninspectable external reference (0/3 labeled;
+3/3 with the skill). The exact-boundary trap no longer catches any current
+model at baseline (9/9 across models). So: for Sonnet and Opus the earned
+section is 6; for Haiku, 6 plus the calibration discipline; sections 3/4 are
+no longer claimed for any current model from this data.
