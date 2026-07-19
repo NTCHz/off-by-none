@@ -63,6 +63,19 @@ Or install manually — copy the `skills/off-by-none/` folder into `~/.claude/sk
 cp -R skills/off-by-none ~/.claude/skills/off-by-none
 ```
 
+## Guaranteed triggering (optional)
+
+Installed either way, the skill is model-invoked: Claude reads its
+description and applies it when a task looks like spec implementation. If
+you want it to fire every time instead of relying on that judgment, add one
+line to your own `~/.claude/CLAUDE.md`:
+
+```markdown
+When implementing or fixing code against a written spec, requirements doc,
+or ticket, ALWAYS invoke the `off-by-none` skill before writing code —
+including "quick fix" and "minimal change" requests.
+```
+
 ## Update
 
 ```bash
